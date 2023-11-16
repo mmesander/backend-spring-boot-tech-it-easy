@@ -1,6 +1,7 @@
 package mesander.com.TechItEasy.controllers;
 
 import mesander.com.TechItEasy.Television;
+import mesander.com.TechItEasy.exceptions.RecordNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class TelevisionController {
         if (id >= 0 && id < this.televisions.size()) {
             return new ResponseEntity<>(this.televisions.get(id), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            throw new RecordNotFoundException("ID cannot be found");
         }
     }
 
@@ -37,7 +38,7 @@ public class TelevisionController {
             this.televisions.set(id, television);
             return new ResponseEntity<>(television, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            throw new RecordNotFoundException("ID cannot be found");
         }
     }
 
@@ -47,7 +48,7 @@ public class TelevisionController {
             this.televisions.remove(id);
             return ResponseEntity.noContent().build();
         } else {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            throw new RecordNotFoundException("ID cannot be found");
         }
     }
 }
