@@ -10,13 +10,9 @@ public class Television {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
     private String type;
-    @Column
     private String brand;
-    @Column
     private String name;
-    @Column
     private Double price;
     @Column(name = "available_size")
     private Double availableSize;
@@ -28,19 +24,15 @@ public class Television {
     private String screenQuality;
     @Column(name = "smart_tv")
     private Boolean smartTv;
-    @Column
     private Boolean wifi;
     @Column(name = "voice_control")
     private Boolean voiceControl;
-    @Column
     private Boolean hdr;
-    @Column
     private Boolean bluetooth;
     @Column(name = "ambi_light")
     private Boolean ambiLight;
     @Column(name = "original_stock")
     private Integer originalStock;
-    @Column
     private Integer sold;
 
     // Constructors
@@ -53,7 +45,7 @@ public class Television {
             String name,
             Double price,
             Double availableSize,
-            double refreshRate,
+            Double refreshRate,
             String screenType,
             String screenQuality,
             Boolean smartTv,
@@ -133,11 +125,11 @@ public class Television {
         this.availableSize = availableSize;
     }
 
-    public double getRefreshRate() {
+    public Double getRefreshRate() {
         return RefreshRate;
     }
 
-    public void setRefreshRate(double refreshRate) {
+    public void setRefreshRate(Double refreshRate) {
         RefreshRate = refreshRate;
     }
 

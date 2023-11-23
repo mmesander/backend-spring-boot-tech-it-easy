@@ -5,6 +5,7 @@ import mesander.com.TechItEasy.exceptions.RecordNotFoundException;
 import mesander.com.TechItEasy.repositories.TelevisionRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +67,75 @@ public class TelevisionController {
             foundTelevision.setType(newTelevision.getType());
             foundTelevision.setVoiceControl(newTelevision.getVoiceControl());
             foundTelevision.setWifi(newTelevision.getWifi());
+
+            Television updatedTelevision = televisionRepository.save(foundTelevision);
+            return ResponseEntity.ok().body(updatedTelevision);
+        }
+    }
+
+    @PatchMapping("/televisions/{id}")
+    public ResponseEntity<Television> updateIncompleteTelevision(@PathVariable("id") Long id, @RequestBody Television newTelevision) {
+        Optional<Television> television = televisionRepository.findById(id);
+
+        if (television.isEmpty()) {
+            throw new RecordNotFoundException("No television found with id: " + id);
+        } else {
+            Television foundTelevision = television.get();
+
+            if (foundTelevision.getAmbiLight() != null) {
+                foundTelevision.setAmbiLight(newTelevision.getAmbiLight());
+            }
+            if (newTelevision.getAvailableSize() != null) {
+                foundTelevision.setAvailableSize(newTelevision.getAvailableSize());
+            }
+            if (foundTelevision.getBluetooth() != null) {
+                foundTelevision.setBluetooth(newTelevision.getBluetooth());
+            }
+            if (foundTelevision.getBrand() != null) {
+                foundTelevision.setBrand(newTelevision.getBrand());
+            }
+            if (foundTelevision.getHdr() != null) {
+                foundTelevision.setHdr(newTelevision.getHdr());
+            }
+            if (foundTelevision.getName() != null) {
+                foundTelevision.setName(newTelevision.getName());
+            }
+            if (foundTelevision.getOriginalStock() != null) {
+                foundTelevision.setOriginalStock(newTelevision.getOriginalStock());
+            }
+
+            if (foundTelevision.getPrice() != null) {
+                foundTelevision.setPrice(newTelevision.getPrice());
+            }
+
+            if (foundTelevision.getRefreshRate() != null) {
+                foundTelevision.setRefreshRate(newTelevision.getRefreshRate());
+            }
+
+            if (foundTelevision.getScreenQuality() != null) {
+                foundTelevision.setScreenQuality(newTelevision.getScreenQuality());
+            }
+
+            if (foundTelevision.getScreenType() != null) {
+                foundTelevision.setScreenType(newTelevision.getScreenType());
+            }
+
+            if (foundTelevision.getSmartTv() != null) {
+                foundTelevision.setSmartTv(newTelevision.getSmartTv());
+            }
+
+            if (foundTelevision.getSold() != null) {
+                foundTelevision.setSold(newTelevision.getSold());
+            }
+            if (foundTelevision.getType() != null) {
+                foundTelevision.setType(newTelevision.getType());
+            }
+            if (foundTelevision.getVoiceControl() != null) {
+                foundTelevision.setVoiceControl(newTelevision.getVoiceControl());
+            }
+            if (foundTelevision.getWifi() != null) {
+                foundTelevision.setWifi(newTelevision.getWifi());
+            }
 
             Television updatedTelevision = televisionRepository.save(foundTelevision);
             return ResponseEntity.ok().body(updatedTelevision);
