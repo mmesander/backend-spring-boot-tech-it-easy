@@ -1,6 +1,6 @@
 package mesander.com.TechItEasy.controllers;
 
-import mesander.com.TechItEasy.Television;
+import mesander.com.TechItEasy.model.Television;
 import mesander.com.TechItEasy.exceptions.RecordNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

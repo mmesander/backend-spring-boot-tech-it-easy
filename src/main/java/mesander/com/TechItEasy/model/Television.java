@@ -1,10 +1,10 @@
-package mesander.com.TechItEasy;
+package mesander.com.TechItEasy.model;
 
 public class Television {
     // Variables
+    private long serialNumber;
     private String name;
     private String brand;
-    private long serialNumber;
     private double price;
 
 
