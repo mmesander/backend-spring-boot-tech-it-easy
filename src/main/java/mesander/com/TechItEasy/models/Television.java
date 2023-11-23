@@ -1,4 +1,4 @@
-package mesander.com.TechItEasy.model;
+package mesander.com.TechItEasy.models;
 
 public class Television {
     // Variables
