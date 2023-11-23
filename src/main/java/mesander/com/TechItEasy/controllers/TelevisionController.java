@@ -82,58 +82,58 @@ public class TelevisionController {
         } else {
             Television foundTelevision = television.get();
 
-            if (foundTelevision.getAmbiLight() != null) {
+            if (newTelevision.getAmbiLight() != null) {
                 foundTelevision.setAmbiLight(newTelevision.getAmbiLight());
             }
             if (newTelevision.getAvailableSize() != null) {
                 foundTelevision.setAvailableSize(newTelevision.getAvailableSize());
             }
-            if (foundTelevision.getBluetooth() != null) {
+            if (newTelevision.getBluetooth() != null) {
                 foundTelevision.setBluetooth(newTelevision.getBluetooth());
             }
-            if (foundTelevision.getBrand() != null) {
+            if (newTelevision.getBrand() != null) {
                 foundTelevision.setBrand(newTelevision.getBrand());
             }
-            if (foundTelevision.getHdr() != null) {
+            if (newTelevision.getHdr() != null) {
                 foundTelevision.setHdr(newTelevision.getHdr());
             }
-            if (foundTelevision.getName() != null) {
+            if (newTelevision.getName() != null) {
                 foundTelevision.setName(newTelevision.getName());
             }
-            if (foundTelevision.getOriginalStock() != null) {
+            if (newTelevision.getOriginalStock() != null) {
                 foundTelevision.setOriginalStock(newTelevision.getOriginalStock());
             }
 
-            if (foundTelevision.getPrice() != null) {
+            if (newTelevision.getPrice() != null) {
                 foundTelevision.setPrice(newTelevision.getPrice());
             }
 
-            if (foundTelevision.getRefreshRate() != null) {
+            if (newTelevision.getRefreshRate() != null) {
                 foundTelevision.setRefreshRate(newTelevision.getRefreshRate());
             }
 
-            if (foundTelevision.getScreenQuality() != null) {
+            if (newTelevision.getScreenQuality() != null) {
                 foundTelevision.setScreenQuality(newTelevision.getScreenQuality());
             }
 
-            if (foundTelevision.getScreenType() != null) {
+            if (newTelevision.getScreenType() != null) {
                 foundTelevision.setScreenType(newTelevision.getScreenType());
             }
 
-            if (foundTelevision.getSmartTv() != null) {
+            if (newTelevision.getSmartTv() != null) {
                 foundTelevision.setSmartTv(newTelevision.getSmartTv());
             }
 
-            if (foundTelevision.getSold() != null) {
+            if (newTelevision.getSold() != null) {
                 foundTelevision.setSold(newTelevision.getSold());
             }
-            if (foundTelevision.getType() != null) {
+            if (newTelevision.getType() != null) {
                 foundTelevision.setType(newTelevision.getType());
             }
-            if (foundTelevision.getVoiceControl() != null) {
+            if (newTelevision.getVoiceControl() != null) {
                 foundTelevision.setVoiceControl(newTelevision.getVoiceControl());
             }
-            if (foundTelevision.getWifi() != null) {
+            if (newTelevision.getWifi() != null) {
                 foundTelevision.setWifi(newTelevision.getWifi());
             }
 
