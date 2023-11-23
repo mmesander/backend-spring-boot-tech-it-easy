@@ -43,8 +43,28 @@ public class Television {
     @Column
     private Integer sold;
 
-    // Constructor
-    public Television(Long id, String type, String brand, String name, Double price, Double availableSize, double refreshRate, String screenType, String screenQuality, Boolean smartTv, Boolean wifi, Boolean voiceControl, Boolean hdr, Boolean bluetooth, Boolean ambiLight, Integer originalStock, Integer sold) {
+    // Constructors
+    public Television(){}
+
+    public Television(
+            Long id,
+            String type,
+            String brand,
+            String name,
+            Double price,
+            Double availableSize,
+            double refreshRate,
+            String screenType,
+            String screenQuality,
+            Boolean smartTv,
+            Boolean wifi,
+            Boolean voiceControl,
+            Boolean hdr,
+            Boolean bluetooth,
+            Boolean ambiLight,
+            Integer originalStock,
+            Integer sold
+    ) {
         this.id = id;
         this.type = type;
         this.brand = brand;
