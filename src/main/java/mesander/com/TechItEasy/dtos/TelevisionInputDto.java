@@ -1,90 +1,34 @@
-package mesander.com.TechItEasy.models;
+package mesander.com.TechItEasy.dtos;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
-@Entity
-@Table(name = "televisions")
-public class Television {
+public class TelevisionInputDto {
     // Variables
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+    @NotNull(message = "Type is required")
     private String type;
+    @NotNull(message = "Brand is required")
     private String brand;
+    @Size(min = 2, max = 20, message = "Name must be between 2 and 20 characters")
     private String name;
+    @Positive(message = "Price must be higher than zero")
     private Double price;
-    @Column(name = "available_size")
     private Double availableSize;
-    @Column(name = "refresh_rate")
     private Double RefreshRate;
-    @Column(name = "screen_type")
     private String screenType;
-    @Column(name = "screen_quality")
     private String screenQuality;
-    @Column(name = "smart_tv")
     private Boolean smartTv;
     private Boolean wifi;
-    @Column(name = "voice_control")
     private Boolean voiceControl;
+    @AssertTrue(message = "All televisions must be HDR minimum")
     private Boolean hdr;
     private Boolean bluetooth;
-    @Column(name = "ambi_light")
     private Boolean ambiLight;
-    @Column(name = "original_stock")
+    @PositiveOrZero(message = "Stock can't be negative")
     private Integer originalStock;
     private Integer sold;
 
-    // Constructors
-    public Television(){}
-
-    public Television(
-            Long id,
-            String type,
-            String brand,
-            String name,
-            Double price,
-            Double availableSize,
-            Double refreshRate,
-            String screenType,
-            String screenQuality,
-            Boolean smartTv,
-            Boolean wifi,
-            Boolean voiceControl,
-            Boolean hdr,
-            Boolean bluetooth,
-            Boolean ambiLight,
-            Integer originalStock,
-            Integer sold
-    ) {
-        this.id = id;
-        this.type = type;
-        this.brand = brand;
-        this.name = name;
-        this.price = price;
-        this.availableSize = availableSize;
-        RefreshRate = refreshRate;
-        this.screenType = screenType;
-        this.screenQuality = screenQuality;
-        this.smartTv = smartTv;
-        this.wifi = wifi;
-        this.voiceControl = voiceControl;
-        this.hdr = hdr;
-        this.bluetooth = bluetooth;
-        this.ambiLight = ambiLight;
-        this.originalStock = originalStock;
-        this.sold = sold;
-    }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getType() {
         return type;
     }
