@@ -1,5 +1,6 @@
 package mesander.com.TechItEasy.controllers;
 
+import mesander.com.TechItEasy.exceptions.IndexOutOfBoundsException;
 import mesander.com.TechItEasy.models.Television;
 import mesander.com.TechItEasy.exceptions.RecordNotFoundException;
 import mesander.com.TechItEasy.repositories.TelevisionRepository;
@@ -36,7 +37,11 @@ public class TelevisionController {
             }
         }
 
-        return ResponseEntity.ok().body(televisions);
+        if (televisions.isEmpty()) {
+            throw new RecordNotFoundException("No televisions found");
+        } else {
+            return ResponseEntity.ok().body(televisions);
+        }
     }
 
     @GetMapping("/televisions/{id}")
