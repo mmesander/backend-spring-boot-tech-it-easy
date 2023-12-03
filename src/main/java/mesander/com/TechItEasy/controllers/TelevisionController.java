@@ -127,15 +127,12 @@ public class TelevisionController {
             if (newTelevision.getScreenQuality() != null) {
                 foundTelevision.setScreenQuality(newTelevision.getScreenQuality());
             }
-
             if (newTelevision.getScreenType() != null) {
                 foundTelevision.setScreenType(newTelevision.getScreenType());
             }
-
             if (newTelevision.getSmartTv() != null) {
                 foundTelevision.setSmartTv(newTelevision.getSmartTv());
             }
-
             if (newTelevision.getSold() != null) {
                 foundTelevision.setSold(newTelevision.getSold());
             }
