@@ -44,7 +44,7 @@ public class TelevisionController {
         Optional<Television> television = televisionRepository.findById(id);
 
         if (television.isEmpty()) {
-            throw new RecordNotFoundException("No television found with id: " + id);
+            throw new IndexOutOfBoundsException("No television found with id: " + id);
         } else {
             Television foundTelevision = television.get();
             return ResponseEntity.ok().body(foundTelevision);
