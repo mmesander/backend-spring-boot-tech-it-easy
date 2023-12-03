@@ -18,9 +18,24 @@ public class TelevisionController {
     }
 
     @GetMapping("/televisions")
-    public ResponseEntity<List<Television>> getAllTelevisions(@RequestParam(value = "brand", required = false) String brand) {
+    public ResponseEntity<List<Television>> getAllTelevisions(
+            @RequestParam(value = "brand", required = false) String brand,
+            @RequestParam(value = "name", required = false) String name
+    ) {
         List<Television> televisions;
-        televisions = televisionRepository.findAll();
+
+        televisions = televisionRepository.findTelevisionsByBrandAndName(brand, name);
+
+        if (televisions.isEmpty()) {
+            if (brand != null) {
+                televisions = televisionRepository.findTelevisionByBrand(brand);
+            } else if (name != null) {
+                televisions = televisionRepository.findTelevisionByName(name);
+            } else {
+                televisions = televisionRepository.findAll();
+            }
+        }
+
         return ResponseEntity.ok().body(televisions);
     }
 
