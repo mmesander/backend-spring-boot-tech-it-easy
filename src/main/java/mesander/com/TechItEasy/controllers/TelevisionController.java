@@ -23,15 +23,6 @@ public class TelevisionController {
     }
 
     // CRUD Requests
-    @GetMapping("/televisions/sales-info")
-    public ResponseEntity<List<TelevisionSalesDto>> getSalesInfo() {
-        List<TelevisionSalesDto> salesDtos;
-
-        salesDtos = televisionService.getSalesInfo();
-
-        return ResponseEntity.ok().body(salesDtos);
-    }
-
     @GetMapping("/televisions")
     public ResponseEntity<List<TelevisionDto>> getAllTelevisions(
             @RequestParam(value = "brand", required = false) Optional<String> brand,
@@ -111,5 +102,15 @@ public class TelevisionController {
         TelevisionDto dto = televisionService.patchTelevision(id, newTelevision);
 
         return ResponseEntity.ok().body(dto);
+    }
+
+    // Bonus
+    @GetMapping("/televisions/sales-info")
+    public ResponseEntity<List<TelevisionSalesDto>> getSalesInfo() {
+        List<TelevisionSalesDto> salesDtos;
+
+        salesDtos = televisionService.getSalesInfo();
+
+        return ResponseEntity.ok().body(salesDtos);
     }
 }
