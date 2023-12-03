@@ -118,15 +118,12 @@ public class TelevisionController {
             if (newTelevision.getOriginalStock() != null) {
                 foundTelevision.setOriginalStock(newTelevision.getOriginalStock());
             }
-
             if (newTelevision.getPrice() != null) {
                 foundTelevision.setPrice(newTelevision.getPrice());
             }
-
             if (newTelevision.getRefreshRate() != null) {
                 foundTelevision.setRefreshRate(newTelevision.getRefreshRate());
             }
-
             if (newTelevision.getScreenQuality() != null) {
                 foundTelevision.setScreenQuality(newTelevision.getScreenQuality());
             }
