@@ -279,6 +279,7 @@ public class TelevisionService {
         salesDto.setPrice(television.getPrice());
         salesDto.setOriginalStock(television.getOriginalStock());
         salesDto.setSold(television.getSold());
+        salesDto.setEarnings(television.getPrice() * television.getSold());
 
         return salesDto;
     }

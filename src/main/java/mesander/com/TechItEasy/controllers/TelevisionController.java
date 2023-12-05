@@ -10,13 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import static mesander.com.TechItEasy.controllers.HelperController.handleBindingResultError;
-
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 public class TelevisionController {
