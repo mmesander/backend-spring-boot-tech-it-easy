@@ -1,5 +1,6 @@
 package mesander.com.TechItEasy.controllers;
 
+import mesander.com.TechItEasy.exceptions.InvalidInputException;
 import mesander.com.TechItEasy.exceptions.RecordNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,5 +17,10 @@ public class ExceptionController {
     @ExceptionHandler(value = IndexOutOfBoundsException.class)
     public ResponseEntity<Object> handleIndexOutOfBoundsException(IndexOutOfBoundsException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = InvalidInputException.class)
+    public ResponseEntity<Object> handleInvalidInputException(InvalidInputException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

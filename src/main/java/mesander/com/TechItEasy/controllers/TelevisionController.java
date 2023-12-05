@@ -4,12 +4,16 @@ import jakarta.validation.Valid;
 import mesander.com.TechItEasy.dtos.TelevisionDto;
 import mesander.com.TechItEasy.dtos.TelevisionInputDto;
 import mesander.com.TechItEasy.dtos.TelevisionSalesDto;
+import mesander.com.TechItEasy.exceptions.InvalidInputException;
 import mesander.com.TechItEasy.services.TelevisionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import static mesander.com.TechItEasy.controllers.HelperController.handleBindingResultError;
+
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,38 +62,27 @@ public class TelevisionController {
     }
 
     @PostMapping("/televisions")
-    public ResponseEntity<Object> createTelevision(@Valid @RequestBody TelevisionInputDto televisionInputDto, BindingResult bindingResult) {
+    public ResponseEntity<TelevisionDto> createTelevision(@Valid @RequestBody TelevisionInputDto televisionInputDto, BindingResult bindingResult) {
         TelevisionDto dto;
-        StringBuilder sb = new StringBuilder();
 
         if (bindingResult.hasFieldErrors()) {
-            for (FieldError error: bindingResult.getFieldErrors()) {
-                sb.append(error.getField());
-                sb.append(" : ");
-                sb.append(error.getDefaultMessage());
-                sb.append("\n");
-            }
-            return ResponseEntity.badRequest().body(sb.toString());
+            throw new InvalidInputException(handleBindingResultError(bindingResult));
         } else {
             dto = televisionService.createTelevision(televisionInputDto);
+            URI uri = URI.create(
+                    ServletUriComponentsBuilder
+                            .fromCurrentRequest()
+                            .path("/" + dto.getId()).toUriString());
+            return ResponseEntity.created(uri).body(dto);
         }
-
-        return ResponseEntity.created(null).body(dto);
     }
 
     @PutMapping("/televisions/{id}")
-    public ResponseEntity<Object> updateTelevision(@PathVariable("id") Long id, @Valid @RequestBody TelevisionInputDto newTelevision, BindingResult bindingResult) {
+    public ResponseEntity<TelevisionDto> updateTelevision(@PathVariable("id") Long id, @Valid @RequestBody TelevisionInputDto newTelevision, BindingResult bindingResult) {
         TelevisionDto dto;
-        StringBuilder sb = new StringBuilder();
 
         if (bindingResult.hasFieldErrors()) {
-            for (FieldError error: bindingResult.getFieldErrors()) {
-                sb.append(error.getField());
-                sb.append(" : ");
-                sb.append(error.getDefaultMessage());
-                sb.append("\n");
-            }
-            return ResponseEntity.badRequest().body(sb.toString());
+            throw new InvalidInputException(handleBindingResultError(bindingResult));
         } else {
             dto = televisionService.updateTelevision(id, newTelevision);
         }
