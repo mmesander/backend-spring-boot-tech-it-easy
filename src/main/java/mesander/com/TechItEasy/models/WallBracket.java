@@ -22,7 +22,7 @@ public class WallBracket {
 
     // Relations
     @ManyToMany(mappedBy = "wallBrackets")
-    List<Television> televisions;
+    private List<Television> televisions;
 
     // Constructors
     public WallBracket() {

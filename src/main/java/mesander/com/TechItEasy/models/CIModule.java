@@ -23,7 +23,7 @@ public class CIModule {
 
     // Relations
     @OneToMany(mappedBy = "ciModule")
-    List<Television> televisions;
+    private List<Television> televisions;
 
 
     // Constructors
