@@ -38,7 +38,7 @@ public class CIModuleService {
     }
 
     public List<CIModuleDto> getAllCIModulesByName(String name) {
-        List<CIModule> ciModules = ciModuleRepository.findCIModuleByName(name);
+        List<CIModule> ciModules = ciModuleRepository.findCIModuleByNameContainsIgnoreCase(name);
         List<CIModuleDto> ciModuleDtos = new ArrayList<>();
 
         for (CIModule ciModule : ciModules) {
