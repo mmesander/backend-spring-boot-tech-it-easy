@@ -1,4 +1,4 @@
-package mesander.com.TechItEasy.dtos;
+package mesander.com.TechItEasy.dtos.input;
 
 import jakarta.validation.constraints.*;
 import lombok.Getter;

@@ -1,8 +1,8 @@
 package mesander.com.TechItEasy.services;
 
-import mesander.com.TechItEasy.dtos.TelevisionDto;
-import mesander.com.TechItEasy.dtos.TelevisionInputDto;
-import mesander.com.TechItEasy.dtos.TelevisionSalesDto;
+import mesander.com.TechItEasy.dtos.output.TelevisionDto;
+import mesander.com.TechItEasy.dtos.input.TelevisionInputDto;
+import mesander.com.TechItEasy.dtos.output.TelevisionSalesDto;
 import mesander.com.TechItEasy.exceptions.RecordNotFoundException;
 import mesander.com.TechItEasy.models.Television;
 import mesander.com.TechItEasy.repositories.TelevisionRepository;
