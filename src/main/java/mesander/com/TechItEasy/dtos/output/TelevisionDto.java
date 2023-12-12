@@ -6,6 +6,8 @@ import lombok.Setter;
 import mesander.com.TechItEasy.models.CIModule;
 import mesander.com.TechItEasy.models.WallBracket;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class TelevisionDto {
@@ -31,5 +33,5 @@ public class TelevisionDto {
     // Relations
     private RemoteControllerDto remoteController;
     private CIModuleDto ciModule;
-    private WallBracketDto wallBracket;
+    private List<WallBracketDto> wallBracket;
 }
