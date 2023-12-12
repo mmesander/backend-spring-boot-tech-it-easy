@@ -29,5 +29,5 @@ public class TelevisionDto {
 
     // Relations
     private RemoteControllerDto remoteController;
-    private CIModule ciModule;
+    private CIModuleDto ciModule;
 }
