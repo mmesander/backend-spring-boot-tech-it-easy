@@ -183,6 +183,7 @@ public class RemoteControllerService {
     public RemoteControllerDto transferToDto(RemoteController remoteController){
         RemoteControllerDto dto = new RemoteControllerDto();
 
+        dto.setId(remoteController.getId());
         dto.setCompatibleWith(remoteController.getCompatibleWith());
         dto.setBatteryType(remoteController.getBatteryType());
         dto.setName(remoteController.getName());
