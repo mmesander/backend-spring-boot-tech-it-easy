@@ -1,6 +1,7 @@
 package mesander.com.TechItEasy.controllers;
 
 import jakarta.validation.Valid;
+import mesander.com.TechItEasy.dtos.input.IdInputDto;
 import mesander.com.TechItEasy.dtos.output.TelevisionDto;
 import mesander.com.TechItEasy.dtos.input.TelevisionInputDto;
 import mesander.com.TechItEasy.dtos.output.TelevisionSalesDto;
@@ -93,6 +94,22 @@ public class TelevisionController {
 
         return ResponseEntity.ok().body(dto);
     }
+
+
+    // Relations Requests
+    @PutMapping("/televisions/{id}/remote-controller")
+    public ResponseEntity<Object> assignRemoteControllerToTelevision(
+            @PathVariable("id") Long id,
+            @Valid
+            @RequestBody IdInputDto input
+            ) {
+        TelevisionDto dto;
+        televisionService.assignRemoteControllerToTelevision(id, input.id);
+        dto = televisionService.getTelevisionById(id);
+
+        return ResponseEntity.ok().body(dto);
+    }
+
 
     // Bonus
     @GetMapping("/televisions/sales-info")

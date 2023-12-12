@@ -42,8 +42,8 @@ public class Television {
 
     // Relations
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "remote_controllers", nullable = false)
-    RemoteController remoteControllerRelation;
+    @JoinColumn(name = "remote_controllers")
+    RemoteController remoteController;
 
 
 

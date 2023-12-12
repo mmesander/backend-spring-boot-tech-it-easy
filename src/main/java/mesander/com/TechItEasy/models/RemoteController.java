@@ -26,7 +26,7 @@ public class RemoteController {
 
 
     // Relations
-    @OneToOne(mappedBy = "remoteControllerRelation")
+    @OneToOne(mappedBy = "remoteController")
     Television television;
 
 

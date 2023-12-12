@@ -24,4 +24,5 @@ public class TelevisionDto {
     private Boolean ambiLight;
     private Integer originalStock;
     private Integer sold;
+    private RemoteControllerDto remoteController;
 }

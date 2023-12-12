@@ -4,7 +4,9 @@ import mesander.com.TechItEasy.dtos.output.TelevisionDto;
 import mesander.com.TechItEasy.dtos.input.TelevisionInputDto;
 import mesander.com.TechItEasy.dtos.output.TelevisionSalesDto;
 import mesander.com.TechItEasy.exceptions.RecordNotFoundException;
+import mesander.com.TechItEasy.models.RemoteController;
 import mesander.com.TechItEasy.models.Television;
+import mesander.com.TechItEasy.repositories.RemoteControllerRepository;
 import mesander.com.TechItEasy.repositories.TelevisionRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +17,17 @@ import java.util.Optional;
 @Service
 public class TelevisionService {
     private final TelevisionRepository televisionRepository;
+    private final RemoteControllerRepository remoteControllerRepository;
+    private final RemoteControllerService remoteControllerService;
 
-    public TelevisionService(TelevisionRepository televisionRepository) {
+    public TelevisionService(
+            TelevisionRepository televisionRepository,
+            RemoteControllerRepository remoteControllerRepository,
+            RemoteControllerService remoteControllerService
+    ) {
         this.televisionRepository = televisionRepository;
+        this.remoteControllerRepository = remoteControllerRepository;
+        this.remoteControllerService = remoteControllerService;
     }
 
 
@@ -254,8 +264,42 @@ public class TelevisionService {
         dto.setVoiceControl(television.getVoiceControl());
         dto.setWifi(television.getWifi());
 
+        if (television.getRemoteController() != null) {
+            dto.setRemoteController(remoteControllerService.transferToDto(television.getRemoteController()));
+        }
+
         return dto;
     }
+
+
+    // Relations Methods
+    public TelevisionDto assignRemoteControllerToTelevision(Long id, Long remoteControllerId) {
+        Optional<Television> optionalTelevision = televisionRepository.findById(id);
+        Optional<RemoteController> optionalRemoteController = remoteControllerRepository.findById(remoteControllerId);
+        TelevisionDto dto;
+
+        if (optionalTelevision.isPresent() && optionalRemoteController.isPresent()) {
+            Television television = optionalTelevision.get();
+            RemoteController remoteController = optionalRemoteController.get();
+
+            television.setRemoteController(remoteController);
+            televisionRepository.save(television);
+
+            dto = transferToDto(television);
+            return dto;
+
+
+        } else {
+            if (optionalTelevision.isEmpty() && optionalRemoteController.isEmpty()) {
+                throw new RecordNotFoundException("Television with id: " + id + " and remote controller with id: " + remoteControllerId + " are not found");
+            } else if (optionalTelevision.isEmpty()) {
+                throw new RecordNotFoundException("Television with id: " + id + " is not found");
+            } else {
+                throw new RecordNotFoundException("Remote controller with id: " + remoteControllerId + " is not found");
+            }
+        }
+    }
+
 
     // Bonus
     public List<TelevisionSalesDto> getSalesInfo() {
