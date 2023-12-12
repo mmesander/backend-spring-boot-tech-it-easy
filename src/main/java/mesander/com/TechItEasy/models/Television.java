@@ -21,7 +21,7 @@ public class Television {
     @Column(name = "available_size")
     private Double availableSize;
     @Column(name = "refresh_rate")
-    private Double RefreshRate;
+    private Double refreshRate;
     @Column(name = "screen_type")
     private String screenType;
     @Column(name = "screen_quality")
@@ -67,7 +67,7 @@ public class Television {
         this.name = name;
         this.price = price;
         this.availableSize = availableSize;
-        RefreshRate = refreshRate;
+        this.refreshRate = refreshRate;
         this.screenType = screenType;
         this.screenQuality = screenQuality;
         this.smartTv = smartTv;
