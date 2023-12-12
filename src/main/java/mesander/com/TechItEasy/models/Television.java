@@ -39,6 +39,7 @@ public class Television {
     private Integer originalStock;
     private Integer sold;
 
+
     // Constructors
     public Television(){}
 

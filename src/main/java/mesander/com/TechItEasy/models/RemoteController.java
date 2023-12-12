@@ -18,6 +18,7 @@ public class RemoteController {
     private String compatibleWith;
     @Column(name = "battery_type")
     private String batteryType;
+    private String name;
     private String brand;
     private Double price;
     @Column(name = "original_stock")
@@ -30,6 +31,7 @@ public class RemoteController {
             Long id,
             String compatibleWith,
             String batteryType,
+            String name,
             String brand,
             Double price,
             Integer originalStock
@@ -37,6 +39,7 @@ public class RemoteController {
         this.id = id;
         this.compatibleWith = compatibleWith;
         this.batteryType = batteryType;
+        this.name = name;
         this.brand = brand;
         this.price = price;
         this.originalStock = originalStock;
