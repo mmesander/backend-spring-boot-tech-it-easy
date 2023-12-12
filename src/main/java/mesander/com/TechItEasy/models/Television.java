@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -49,10 +51,18 @@ public class Television {
     @JoinColumn(name = "ci_module_id")
     private CIModule ciModule;
 
+    @ManyToMany
+    @JoinTable(
+            name = "television_wall_brackets",
+            joinColumns = @JoinColumn(name = "wall_bracket_id"),
+            inverseJoinColumns = @JoinColumn(name = "television_id")
+    )
+    List<WallBracket> wallBrackets;
 
 
     // Constructors
-    public Television(){}
+    public Television() {
+    }
 
     public Television(
             Long id,
