@@ -8,6 +8,5 @@ import java.util.List;
 public interface RemoteControllerRepository extends JpaRepository<RemoteController, Long> {
     List<RemoteController> findRemoteControllerByName(String name);
     List<RemoteController> findRemoteControllerByBrand(String brand);
-    List<RemoteController> findRemoteControllerByBrandAndName(String brand, String name);
     List<RemoteController> findRemoteControllerByCompatibleWith(String compatibleWith);
 }
