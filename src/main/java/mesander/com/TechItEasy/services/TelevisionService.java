@@ -3,13 +3,16 @@ package mesander.com.TechItEasy.services;
 import mesander.com.TechItEasy.dtos.output.TelevisionDto;
 import mesander.com.TechItEasy.dtos.input.TelevisionInputDto;
 import mesander.com.TechItEasy.dtos.output.TelevisionSalesDto;
+import mesander.com.TechItEasy.dtos.output.WallBracketDto;
 import mesander.com.TechItEasy.exceptions.RecordNotFoundException;
 import mesander.com.TechItEasy.models.CIModule;
 import mesander.com.TechItEasy.models.RemoteController;
 import mesander.com.TechItEasy.models.Television;
+import mesander.com.TechItEasy.models.WallBracket;
 import mesander.com.TechItEasy.repositories.CIModuleRepository;
 import mesander.com.TechItEasy.repositories.RemoteControllerRepository;
 import mesander.com.TechItEasy.repositories.TelevisionRepository;
+import mesander.com.TechItEasy.repositories.WallBracketRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,21 +24,27 @@ public class TelevisionService {
     private final TelevisionRepository televisionRepository;
     private final RemoteControllerRepository remoteControllerRepository;
     private final CIModuleRepository ciModuleRepository;
+    private final WallBracketRepository wallBracketRepository;
     private final RemoteControllerService remoteControllerService;
     private final CIModuleService ciModuleService;
+    private final WallBracketService wallBracketService;
 
     public TelevisionService(
             TelevisionRepository televisionRepository,
             RemoteControllerRepository remoteControllerRepository,
             CIModuleRepository ciModuleRepository,
+            WallBracketRepository wallBracketRepository,
             RemoteControllerService remoteControllerService,
-            CIModuleService ciModuleService
+            CIModuleService ciModuleService,
+            WallBracketService wallBracketService
     ) {
         this.televisionRepository = televisionRepository;
         this.remoteControllerRepository = remoteControllerRepository;
         this.ciModuleRepository = ciModuleRepository;
+        this.wallBracketRepository = wallBracketRepository;
         this.remoteControllerService = remoteControllerService;
         this.ciModuleService = ciModuleService;
+        this.wallBracketService = wallBracketService;
     }
 
 
@@ -278,6 +287,14 @@ public class TelevisionService {
 
         if (television.getCiModule() != null) {
             dto.setCiModule(ciModuleService.transferToDto(television.getCiModule()));
+        }
+
+        if (television.getWallBrackets() != null) {
+            List<WallBracketDto> wallBracketDtos = new ArrayList<>();
+            for (WallBracket wallBracket : television.getWallBrackets()) {
+                wallBracketDtos.add(wallBracketService.transferToDto(wallBracket));
+            }
+            dto.setWallBracket(wallBracketDtos);
         }
 
         return dto;

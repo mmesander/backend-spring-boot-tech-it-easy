@@ -54,8 +54,8 @@ public class Television {
     @ManyToMany
     @JoinTable(
             name = "television_wall_brackets",
-            joinColumns = @JoinColumn(name = "wall_bracket_id"),
-            inverseJoinColumns = @JoinColumn(name = "television_id")
+            joinColumns = @JoinColumn(name = "television_id"),
+            inverseJoinColumns = @JoinColumn(name = "wall_bracket_id")
     )
     private List<WallBracket> wallBrackets;
 

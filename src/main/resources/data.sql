@@ -34,3 +34,8 @@ VALUES
     (1003, '25X25', false, 'Philips bracket', 32.23),
     (1004, '25X32/32X40', true, 'Nikkei bracket', 32.23),
     (1005, '25X32', false, 'Nikkei bracket', 32.23);
+
+INSERT INTO television_wall_brackets (television_id, wall_bracket_id)
+VALUES
+    (1, 1001),
+    (1, 1002);
