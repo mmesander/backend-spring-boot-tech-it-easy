@@ -38,7 +38,7 @@ public class RemoteControllerService {
     }
 
     public List<RemoteControllerDto> getAllRemoteControllersByBrand(String brand) {
-        List<RemoteController> remoteControllers = remoteControllerRepository.findRemoteControllerByBrand(brand);
+        List<RemoteController> remoteControllers = remoteControllerRepository.findRemoteControllerByBrandContainsIgnoreCase(brand);
         List<RemoteControllerDto> remoteControllerDtos = new ArrayList<>();
 
         for (RemoteController remoteController : remoteControllers) {
@@ -54,7 +54,7 @@ public class RemoteControllerService {
     }
 
     public List<RemoteControllerDto> getAllRemoteControllersByName(String name) {
-        List<RemoteController> remoteControllers = remoteControllerRepository.findRemoteControllerByName(name);
+        List<RemoteController> remoteControllers = remoteControllerRepository.findRemoteControllerByNameContainsIgnoreCase(name);
         List<RemoteControllerDto> remoteControllerDtos = new ArrayList<>();
 
         for (RemoteController remoteController : remoteControllers) {
@@ -70,7 +70,7 @@ public class RemoteControllerService {
     }
 
     public List<RemoteControllerDto> getAllRemoteControllersCompatibleWith(String compatibleWith) {
-        List<RemoteController> remoteControllers = remoteControllerRepository.findRemoteControllerByCompatibleWith(compatibleWith);
+        List<RemoteController> remoteControllers = remoteControllerRepository.findRemoteControllerByCompatibleWithIgnoreCase(compatibleWith);
         List<RemoteControllerDto> remoteControllerDtos = new ArrayList<>();
 
         for (RemoteController remoteController : remoteControllers) {

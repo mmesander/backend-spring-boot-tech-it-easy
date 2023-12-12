@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface RemoteControllerRepository extends JpaRepository<RemoteController, Long> {
-    List<RemoteController> findRemoteControllerByName(String name);
-    List<RemoteController> findRemoteControllerByBrand(String brand);
-    List<RemoteController> findRemoteControllerByCompatibleWith(String compatibleWith);
+    List<RemoteController> findRemoteControllerByNameContainsIgnoreCase(String name);
+    List<RemoteController> findRemoteControllerByBrandContainsIgnoreCase(String brand);
+    List<RemoteController> findRemoteControllerByCompatibleWithIgnoreCase(String compatibleWith);
 }
