@@ -20,6 +20,8 @@ public class TelevisionService {
         this.televisionRepository = televisionRepository;
     }
 
+
+    // Crud Methods
     public List<TelevisionDto> getAllTelevisions() {
         List<Television> televisions = televisionRepository.findAll();
         List<TelevisionDto> televisionDtos = new ArrayList<>();
@@ -207,6 +209,7 @@ public class TelevisionService {
     }
 
 
+    // Transfer Methods
     public Television transferToTelevision(TelevisionInputDto dto) {
         Television television = new Television();
 
@@ -255,7 +258,6 @@ public class TelevisionService {
     }
 
     // Bonus
-
     public List<TelevisionSalesDto> getSalesInfo() {
         List<Television> televisions = televisionRepository.findAll();
         List<TelevisionSalesDto> televisionSalesDtos = new ArrayList<>();

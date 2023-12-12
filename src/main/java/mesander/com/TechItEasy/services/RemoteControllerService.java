@@ -19,6 +19,8 @@ public class RemoteControllerService {
         this.remoteControllerRepository = remoteControllerRepository;
     }
 
+
+    // Crud Methods
     public List<RemoteControllerDto> getAllRemoteControllers() {
         List<RemoteController> remoteControllers = remoteControllerRepository.findAll();
         List<RemoteControllerDto> remoteControllerDtos = new ArrayList<>();
@@ -193,8 +195,4 @@ public class RemoteControllerService {
 
         return dto;
     }
-
-
-
-
 }
