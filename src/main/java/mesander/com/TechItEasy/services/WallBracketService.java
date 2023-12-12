@@ -38,7 +38,7 @@ public class WallBracketService {
     }
 
     public List<WallBracketDto> getAllWallBracketsByAdjustable(Boolean adjustable) {
-        List<WallBracket> wallBrackets = wallBracketRepository.findWallBracketsByAdjustable(adjustable);
+        List<WallBracket> wallBrackets = wallBracketRepository.findWallBracketsByAdjustableIgnoreCase(adjustable);
         List<WallBracketDto> wallBracketDtos = new ArrayList<>();
 
         for (WallBracket wallBracket : wallBrackets) {
