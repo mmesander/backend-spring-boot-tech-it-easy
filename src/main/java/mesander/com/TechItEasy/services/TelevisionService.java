@@ -4,8 +4,10 @@ import mesander.com.TechItEasy.dtos.output.TelevisionDto;
 import mesander.com.TechItEasy.dtos.input.TelevisionInputDto;
 import mesander.com.TechItEasy.dtos.output.TelevisionSalesDto;
 import mesander.com.TechItEasy.exceptions.RecordNotFoundException;
+import mesander.com.TechItEasy.models.CIModule;
 import mesander.com.TechItEasy.models.RemoteController;
 import mesander.com.TechItEasy.models.Television;
+import mesander.com.TechItEasy.repositories.CIModuleRepository;
 import mesander.com.TechItEasy.repositories.RemoteControllerRepository;
 import mesander.com.TechItEasy.repositories.TelevisionRepository;
 import org.springframework.stereotype.Service;
@@ -18,16 +20,22 @@ import java.util.Optional;
 public class TelevisionService {
     private final TelevisionRepository televisionRepository;
     private final RemoteControllerRepository remoteControllerRepository;
+    private final CIModuleRepository ciModuleRepository;
     private final RemoteControllerService remoteControllerService;
+    private final CIModuleService ciModuleService;
 
     public TelevisionService(
             TelevisionRepository televisionRepository,
             RemoteControllerRepository remoteControllerRepository,
-            RemoteControllerService remoteControllerService
+            CIModuleRepository ciModuleRepository,
+            RemoteControllerService remoteControllerService,
+            CIModuleService ciModuleService
     ) {
         this.televisionRepository = televisionRepository;
         this.remoteControllerRepository = remoteControllerRepository;
+        this.ciModuleRepository = ciModuleRepository;
         this.remoteControllerService = remoteControllerService;
+        this.ciModuleService = ciModuleService;
     }
 
 
@@ -268,6 +276,10 @@ public class TelevisionService {
             dto.setRemoteController(remoteControllerService.transferToDto(television.getRemoteController()));
         }
 
+        if (television.getCiModule() != null) {
+            dto.setCiModule(ciModuleService.transferToDto(television.getCiModule()));
+        }
+
         return dto;
     }
 
@@ -296,6 +308,31 @@ public class TelevisionService {
                 throw new RecordNotFoundException("Television with id: " + id + " is not found");
             } else {
                 throw new RecordNotFoundException("Remote controller with id: " + remoteControllerId + " is not found");
+            }
+        }
+    }
+
+    public TelevisionDto assignCIModuleToTelevision(Long id, Long ciModuleId) {
+        Optional<Television> optionalTelevision = televisionRepository.findById(id);
+        Optional<CIModule> optionalCIModule = ciModuleRepository.findById(ciModuleId);
+        TelevisionDto dto;
+
+        if (optionalTelevision.isPresent() && optionalCIModule.isPresent()) {
+            Television television = optionalTelevision.get();
+            CIModule ciModule = optionalCIModule.get();
+
+            television.setCiModule(ciModule);
+            televisionRepository.save(television);
+
+            dto = transferToDto(television);
+            return dto;
+        } else {
+            if (optionalTelevision.isEmpty() && optionalCIModule.isEmpty()) {
+                throw new RecordNotFoundException("Television with id: " + id + " and ci-module with id: " + ciModuleId + " are not found");
+            } else if (optionalTelevision.isEmpty()) {
+                throw new RecordNotFoundException("Television with id: " + id + " is not found");
+            } else {
+                throw new RecordNotFoundException("Ci-module with id: " + ciModuleId + " is not found");
             }
         }
     }

@@ -27,7 +27,7 @@ public class RemoteController {
 
     // Relations
     @OneToOne(mappedBy = "remoteController")
-    Television television;
+    private Television television;
 
 
     // Constructors

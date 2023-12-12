@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 public class IdInputDto {
     @NotNull
-    public Long id;
+    private Long id;
 }

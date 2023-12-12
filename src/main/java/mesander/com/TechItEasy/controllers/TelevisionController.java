@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import static mesander.com.TechItEasy.controllers.HelperController.handleBindingResultError;
+
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -102,9 +104,22 @@ public class TelevisionController {
             @PathVariable("id") Long id,
             @Valid
             @RequestBody IdInputDto input
+    ) {
+        TelevisionDto dto;
+        televisionService.assignRemoteControllerToTelevision(id, input.getId());
+        dto = televisionService.getTelevisionById(id);
+
+        return ResponseEntity.ok().body(dto);
+    }
+
+    @PutMapping("/televisions/{id}/ci-module")
+    public ResponseEntity<Object> assignCIModuleToTelevision(
+            @PathVariable("id") Long id,
+            @Valid
+            @RequestBody IdInputDto input
             ) {
         TelevisionDto dto;
-        televisionService.assignRemoteControllerToTelevision(id, input.id);
+        televisionService.assignCIModuleToTelevision(id, input.getId());
         dto = televisionService.getTelevisionById(id);
 
         return ResponseEntity.ok().body(dto);

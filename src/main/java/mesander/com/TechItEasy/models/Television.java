@@ -43,7 +43,11 @@ public class Television {
     // Relations
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "remote_controllers")
-    RemoteController remoteController;
+    private RemoteController remoteController;
+
+    @ManyToOne
+    @JoinColumn(name = "ci_module_id")
+    private CIModule ciModule;
 
 
 

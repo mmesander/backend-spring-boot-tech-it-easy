@@ -3,10 +3,12 @@ package mesander.com.TechItEasy.dtos.output;
 
 import lombok.Getter;
 import lombok.Setter;
+import mesander.com.TechItEasy.models.CIModule;
 
 @Getter
 @Setter
 public class TelevisionDto {
+    // Variables
     private Long id;
     private String type;
     private String brand;
@@ -24,5 +26,8 @@ public class TelevisionDto {
     private Boolean ambiLight;
     private Integer originalStock;
     private Integer sold;
+
+    // Relations
     private RemoteControllerDto remoteController;
+    private CIModule ciModule;
 }
