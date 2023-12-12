@@ -19,6 +19,10 @@ public class CIModule {
     private Double price;
 
 
+    // Relations
+
+
+
     // Constructors
     public CIModule(){}
 

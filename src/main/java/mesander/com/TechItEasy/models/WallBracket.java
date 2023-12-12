@@ -18,6 +18,10 @@ public class WallBracket {
     private Double price;
 
 
+    // Relations
+
+
+
     // Constructors
     public WallBracket() {
     }

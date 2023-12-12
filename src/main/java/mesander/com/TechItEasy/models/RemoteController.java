@@ -24,6 +24,12 @@ public class RemoteController {
     @Column(name = "original_stock")
     private Integer originalStock;
 
+
+    // Relations
+    @OneToOne(mappedBy = "remoteControllerRelation")
+    Television television;
+
+
     // Constructors
     public RemoteController(){}
 

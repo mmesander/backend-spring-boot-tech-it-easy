@@ -40,6 +40,13 @@ public class Television {
     private Integer sold;
 
 
+    // Relations
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "remote_controllers", nullable = false)
+    RemoteController remoteControllerRelation;
+
+
+
     // Constructors
     public Television(){}
 
