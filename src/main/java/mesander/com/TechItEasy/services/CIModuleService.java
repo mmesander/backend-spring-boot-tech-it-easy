@@ -126,12 +126,12 @@ public class CIModuleService {
 
 
     // Transfer Methods
-    public CIModule transferToCIModule(CIModuleInputDto dto) {
+    public CIModule transferToCIModule(CIModuleInputDto inputDto) {
         CIModule ciModule = new CIModule();
 
-        ciModule.setName(dto.getName());
-        ciModule.setType(dto.getType());
-        ciModule.setPrice(dto.getPrice());
+        ciModule.setName(inputDto.getName());
+        ciModule.setType(inputDto.getType());
+        ciModule.setPrice(inputDto.getPrice());
 
         return ciModule;
     }
