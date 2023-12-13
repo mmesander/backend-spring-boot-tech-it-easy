@@ -218,6 +218,8 @@ public class RemoteControllerService {
             tdto.setType(television.getType());
             tdto.setVoiceControl(television.getVoiceControl());
             tdto.setWifi(television.getWifi());
+
+            dto.setTelevision(tdto);
         }
 
         return dto;
