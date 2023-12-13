@@ -13,6 +13,7 @@ public class WallBracketDto {
     private String name;
     private Double price;
 
+
     // Relations
     private Set<TelevisionDto> televisions;
 }

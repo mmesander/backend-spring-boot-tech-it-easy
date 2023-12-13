@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TelevisionInputDto {
-    // Variables
     @NotNull(message = "Type is required")
     private String type;
     @NotNull(message = "Brand is required")

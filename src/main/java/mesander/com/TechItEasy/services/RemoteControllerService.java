@@ -8,7 +8,6 @@ import mesander.com.TechItEasy.models.RemoteController;
 import mesander.com.TechItEasy.models.Television;
 import mesander.com.TechItEasy.repositories.RemoteControllerRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

@@ -24,15 +24,4 @@ public class CIModule {
     // Relations
     @OneToMany(mappedBy = "ciModule")
     private Set<Television> televisions;
-
-
-    // Constructors
-    public CIModule(){}
-
-    public CIModule(Long id, String name, String type, Double price) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.price = price;
-    }
 }

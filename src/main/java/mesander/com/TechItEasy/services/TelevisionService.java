@@ -14,7 +14,6 @@ import mesander.com.TechItEasy.repositories.RemoteControllerRepository;
 import mesander.com.TechItEasy.repositories.TelevisionRepository;
 import mesander.com.TechItEasy.repositories.WallBracketRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 
 @Service

@@ -1,6 +1,5 @@
 package mesander.com.TechItEasy.dtos.output;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Set;
@@ -26,6 +25,7 @@ public class TelevisionDto {
     private Boolean ambiLight;
     private Integer originalStock;
     private Integer sold;
+
 
     // Relations
     private RemoteControllerDto remoteController;

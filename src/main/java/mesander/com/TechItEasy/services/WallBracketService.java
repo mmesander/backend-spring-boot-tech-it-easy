@@ -8,7 +8,6 @@ import mesander.com.TechItEasy.models.Television;
 import mesander.com.TechItEasy.models.WallBracket;
 import mesander.com.TechItEasy.repositories.WallBracketRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 
 @Service

@@ -22,22 +22,4 @@ public class WallBracket {
     // Relations
     @ManyToMany(mappedBy = "wallBrackets")
     private Set<Television> televisions;
-
-    // Constructors
-    public WallBracket() {
-    }
-
-    public WallBracket(
-            Long id,
-            String size,
-            Boolean adjustable,
-            String name,
-            Double price
-    ) {
-        this.id = id;
-        this.size = size;
-        this.adjustable = adjustable;
-        this.name = name;
-        this.price = price;
-    }
 }

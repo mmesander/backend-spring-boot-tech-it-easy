@@ -28,26 +28,4 @@ public class RemoteController {
     // Relations
     @OneToOne(mappedBy = "remoteController", fetch = FetchType.LAZY)
     private Television television;
-
-
-    // Constructors
-    public RemoteController(){}
-
-    public RemoteController(
-            Long id,
-            String compatibleWith,
-            String batteryType,
-            String name,
-            String brand,
-            Double price,
-            Integer originalStock
-    ) {
-        this.id = id;
-        this.compatibleWith = compatibleWith;
-        this.batteryType = batteryType;
-        this.name = name;
-        this.brand = brand;
-        this.price = price;
-        this.originalStock = originalStock;
-    }
 }
