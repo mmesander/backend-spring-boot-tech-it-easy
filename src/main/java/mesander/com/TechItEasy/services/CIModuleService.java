@@ -2,14 +2,14 @@ package mesander.com.TechItEasy.services;
 
 import mesander.com.TechItEasy.dtos.input.CIModuleInputDto;
 import mesander.com.TechItEasy.dtos.output.CIModuleDto;
+import mesander.com.TechItEasy.dtos.output.TelevisionDto;
 import mesander.com.TechItEasy.exceptions.RecordNotFoundException;
 import mesander.com.TechItEasy.models.CIModule;
+import mesander.com.TechItEasy.models.Television;
 import mesander.com.TechItEasy.repositories.CIModuleRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CIModuleService {
@@ -143,6 +143,37 @@ public class CIModuleService {
         dto.setName(ciModule.getName());
         dto.setType(ciModule.getType());
         dto.setPrice(ciModule.getPrice());
+
+        if (ciModule.getTelevisions() != null) {
+            Set<Television> televisions = ciModule.getTelevisions();
+            Set<TelevisionDto> televisionDtos = new HashSet<>();
+
+            for (Television television : televisions) {
+                TelevisionDto tdto = new TelevisionDto();
+
+                tdto.setId(television.getId());
+                tdto.setAmbiLight(television.getAmbiLight());
+                tdto.setAvailableSize(television.getAvailableSize());
+                tdto.setBluetooth(television.getBluetooth());
+                tdto.setBrand(television.getBrand());
+                tdto.setHdr(television.getHdr());
+                tdto.setName(television.getName());
+                tdto.setOriginalStock(television.getOriginalStock());
+                tdto.setPrice(television.getPrice());
+                tdto.setRefreshRate(television.getRefreshRate());
+                tdto.setScreenQuality(television.getScreenQuality());
+                tdto.setScreenType(television.getScreenType());
+                tdto.setSmartTv(television.getSmartTv());
+                tdto.setSold(television.getSold());
+                tdto.setType(television.getType());
+                tdto.setVoiceControl(television.getVoiceControl());
+                tdto.setWifi(television.getWifi());
+
+                televisionDtos.add(tdto);
+            }
+
+            dto.setTelevision(televisionDtos);
+        }
 
         return dto;
     }

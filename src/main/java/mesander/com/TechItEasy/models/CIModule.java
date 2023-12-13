@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,7 +23,7 @@ public class CIModule {
 
     // Relations
     @OneToMany(mappedBy = "ciModule")
-    private List<Television> televisions;
+    private Set<Television> televisions;
 
 
     // Constructors
