@@ -3,8 +3,7 @@ package mesander.com.TechItEasy.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,7 +21,7 @@ public class WallBracket {
 
     // Relations
     @ManyToMany(mappedBy = "wallBrackets")
-    private List<Television> televisions;
+    private Set<Television> televisions;
 
     // Constructors
     public WallBracket() {
