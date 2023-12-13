@@ -26,7 +26,7 @@ public class RemoteController {
 
 
     // Relations
-    @OneToOne(mappedBy = "remoteController")
+    @OneToOne(mappedBy = "remoteController", fetch = FetchType.LAZY)
     private Television television;
 
 

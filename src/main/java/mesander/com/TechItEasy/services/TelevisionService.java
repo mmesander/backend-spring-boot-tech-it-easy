@@ -15,9 +15,7 @@ import mesander.com.TechItEasy.repositories.TelevisionRepository;
 import mesander.com.TechItEasy.repositories.WallBracketRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class TelevisionService {
@@ -290,7 +288,7 @@ public class TelevisionService {
         }
 
         if (television.getWallBrackets() != null) {
-            List<WallBracketDto> wallBracketDtos = new ArrayList<>();
+            Set<WallBracketDto> wallBracketDtos = new HashSet<>();
             for (WallBracket wallBracket : television.getWallBrackets()) {
                 wallBracketDtos.add(wallBracketService.transferToDto(wallBracket));
             }
@@ -313,6 +311,9 @@ public class TelevisionService {
 
             television.setRemoteController(remoteController);
             televisionRepository.save(television);
+
+            remoteController.setTelevision(television);
+            remoteControllerRepository.save(remoteController);
 
             dto = transferToDto(television);
             return dto;

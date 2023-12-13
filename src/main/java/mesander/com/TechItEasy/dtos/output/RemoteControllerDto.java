@@ -13,4 +13,7 @@ public class RemoteControllerDto {
     private String brand;
     private Double price;
     private Integer originalStock;
+
+    // Relations
+    private TelevisionDto television;
 }

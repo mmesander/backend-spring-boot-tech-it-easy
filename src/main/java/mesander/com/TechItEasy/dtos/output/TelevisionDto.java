@@ -3,10 +3,7 @@ package mesander.com.TechItEasy.dtos.output;
 
 import lombok.Getter;
 import lombok.Setter;
-import mesander.com.TechItEasy.models.CIModule;
-import mesander.com.TechItEasy.models.WallBracket;
-
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -33,5 +30,5 @@ public class TelevisionDto {
     // Relations
     private RemoteControllerDto remoteController;
     private CIModuleDto ciModule;
-    private List<WallBracketDto> wallBracket;
+    private Set<WallBracketDto> wallBracket;
 }

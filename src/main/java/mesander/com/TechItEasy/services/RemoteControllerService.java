@@ -14,9 +14,14 @@ import java.util.Optional;
 @Service
 public class RemoteControllerService {
     private final RemoteControllerRepository remoteControllerRepository;
+    private final TelevisionService televisionService;
 
-    public RemoteControllerService(RemoteControllerRepository remoteControllerRepository) {
+    public RemoteControllerService(
+            RemoteControllerRepository remoteControllerRepository,
+            TelevisionService televisionService
+    ) {
         this.remoteControllerRepository = remoteControllerRepository;
+        this.televisionService = televisionService;
     }
 
 
@@ -25,7 +30,7 @@ public class RemoteControllerService {
         List<RemoteController> remoteControllers = remoteControllerRepository.findAll();
         List<RemoteControllerDto> remoteControllerDtos = new ArrayList<>();
 
-        for (RemoteController remoteController: remoteControllers) {
+        for (RemoteController remoteController : remoteControllers) {
             RemoteControllerDto dto = transferToDto(remoteController);
             remoteControllerDtos.add(dto);
         }
@@ -169,7 +174,7 @@ public class RemoteControllerService {
 
 
     // Transfer Methods
-    public RemoteController transferToRemoteController(RemoteControllerInputDto dto){
+    public RemoteController transferToRemoteController(RemoteControllerInputDto dto) {
         RemoteController remoteController = new RemoteController();
 
         remoteController.setCompatibleWith(dto.getCompatibleWith());
@@ -182,7 +187,7 @@ public class RemoteControllerService {
         return remoteController;
     }
 
-    public RemoteControllerDto transferToDto(RemoteController remoteController){
+    public RemoteControllerDto transferToDto(RemoteController remoteController) {
         RemoteControllerDto dto = new RemoteControllerDto();
 
         dto.setId(remoteController.getId());
@@ -192,6 +197,10 @@ public class RemoteControllerService {
         dto.setBrand(remoteController.getBrand());
         dto.setPrice(remoteController.getPrice());
         dto.setOriginalStock(remoteController.getOriginalStock());
+
+        if (remoteController.getTelevision() != null) {
+            dto.setTelevision(televisionService.transferToDto(remoteController.getTelevision()));
+        }
 
         return dto;
     }
