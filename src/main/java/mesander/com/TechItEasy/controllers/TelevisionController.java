@@ -1,9 +1,10 @@
 package mesander.com.TechItEasy.controllers;
 
 import jakarta.validation.Valid;
-import mesander.com.TechItEasy.dtos.TelevisionDto;
-import mesander.com.TechItEasy.dtos.TelevisionInputDto;
-import mesander.com.TechItEasy.dtos.TelevisionSalesDto;
+import mesander.com.TechItEasy.dtos.input.IdInputDto;
+import mesander.com.TechItEasy.dtos.output.TelevisionDto;
+import mesander.com.TechItEasy.dtos.input.TelevisionInputDto;
+import mesander.com.TechItEasy.dtos.output.TelevisionSalesDto;
 import mesander.com.TechItEasy.exceptions.InvalidInputException;
 import mesander.com.TechItEasy.services.TelevisionService;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class TelevisionController {
     public TelevisionController(TelevisionService televisionService) {
         this.televisionService = televisionService;
     }
+
 
     // CRUD Requests
     @GetMapping("/televisions")
@@ -93,6 +95,35 @@ public class TelevisionController {
 
         return ResponseEntity.ok().body(dto);
     }
+
+
+    // Relations Requests
+    @PutMapping("/televisions/{id}/remote-controller")
+    public ResponseEntity<Object> assignRemoteControllerToTelevision(
+            @PathVariable("id") Long id,
+            @Valid
+            @RequestBody IdInputDto input
+    ) {
+        TelevisionDto dto;
+        televisionService.assignRemoteControllerToTelevision(id, input.getId());
+        dto = televisionService.getTelevisionById(id);
+
+        return ResponseEntity.ok().body(dto);
+    }
+
+    @PutMapping("/televisions/{id}/ci-module")
+    public ResponseEntity<Object> assignCIModuleToTelevision(
+            @PathVariable("id") Long id,
+            @Valid
+            @RequestBody IdInputDto input
+            ) {
+        TelevisionDto dto;
+        televisionService.assignCIModuleToTelevision(id, input.getId());
+        dto = televisionService.getTelevisionById(id);
+
+        return ResponseEntity.ok().body(dto);
+    }
+
 
     // Bonus
     @GetMapping("/televisions/sales-info")

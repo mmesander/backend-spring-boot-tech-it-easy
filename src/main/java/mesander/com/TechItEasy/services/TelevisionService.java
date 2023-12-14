@@ -1,25 +1,51 @@
 package mesander.com.TechItEasy.services;
 
-import mesander.com.TechItEasy.dtos.TelevisionDto;
-import mesander.com.TechItEasy.dtos.TelevisionInputDto;
-import mesander.com.TechItEasy.dtos.TelevisionSalesDto;
+import mesander.com.TechItEasy.dtos.output.TelevisionDto;
+import mesander.com.TechItEasy.dtos.input.TelevisionInputDto;
+import mesander.com.TechItEasy.dtos.output.TelevisionSalesDto;
+import mesander.com.TechItEasy.dtos.output.WallBracketDto;
 import mesander.com.TechItEasy.exceptions.RecordNotFoundException;
+import mesander.com.TechItEasy.models.CIModule;
+import mesander.com.TechItEasy.models.RemoteController;
 import mesander.com.TechItEasy.models.Television;
+import mesander.com.TechItEasy.models.WallBracket;
+import mesander.com.TechItEasy.repositories.CIModuleRepository;
+import mesander.com.TechItEasy.repositories.RemoteControllerRepository;
 import mesander.com.TechItEasy.repositories.TelevisionRepository;
+import mesander.com.TechItEasy.repositories.WallBracketRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class TelevisionService {
     private final TelevisionRepository televisionRepository;
+    private final RemoteControllerRepository remoteControllerRepository;
+    private final CIModuleRepository ciModuleRepository;
+    private final WallBracketRepository wallBracketRepository;
+    private final RemoteControllerService remoteControllerService;
+    private final CIModuleService ciModuleService;
+    private final WallBracketService wallBracketService;
 
-    public TelevisionService(TelevisionRepository televisionRepository) {
+    public TelevisionService(
+            TelevisionRepository televisionRepository,
+            RemoteControllerRepository remoteControllerRepository,
+            CIModuleRepository ciModuleRepository,
+            WallBracketRepository wallBracketRepository,
+            RemoteControllerService remoteControllerService,
+            CIModuleService ciModuleService,
+            WallBracketService wallBracketService
+    ) {
         this.televisionRepository = televisionRepository;
+        this.remoteControllerRepository = remoteControllerRepository;
+        this.ciModuleRepository = ciModuleRepository;
+        this.wallBracketRepository = wallBracketRepository;
+        this.remoteControllerService = remoteControllerService;
+        this.ciModuleService = ciModuleService;
+        this.wallBracketService = wallBracketService;
     }
 
+
+    // Crud Methods
     public List<TelevisionDto> getAllTelevisions() {
         List<Television> televisions = televisionRepository.findAll();
         List<TelevisionDto> televisionDtos = new ArrayList<>();
@@ -207,6 +233,7 @@ public class TelevisionService {
     }
 
 
+    // Transfer Methods
     public Television transferToTelevision(TelevisionInputDto dto) {
         Television television = new Television();
 
@@ -251,11 +278,84 @@ public class TelevisionService {
         dto.setVoiceControl(television.getVoiceControl());
         dto.setWifi(television.getWifi());
 
+        if (television.getRemoteController() != null) {
+            dto.setRemoteController(remoteControllerService.transferToDto(television.getRemoteController()));
+        }
+
+        if (television.getCiModule() != null) {
+            dto.setCiModule(ciModuleService.transferToDto(television.getCiModule()));
+        }
+
+        if (television.getWallBrackets() != null) {
+            Set<WallBracketDto> wallBracketDtos = new HashSet<>();
+            for (WallBracket wallBracket : television.getWallBrackets()) {
+                wallBracketDtos.add(wallBracketService.transferToDto(wallBracket));
+            }
+            dto.setWallBracket(wallBracketDtos);
+        }
+
         return dto;
     }
 
-    // Bonus
 
+    // Relations Methods
+    public TelevisionDto assignRemoteControllerToTelevision(Long id, Long remoteControllerId) {
+        Optional<Television> optionalTelevision = televisionRepository.findById(id);
+        Optional<RemoteController> optionalRemoteController = remoteControllerRepository.findById(remoteControllerId);
+        TelevisionDto dto;
+
+        if (optionalTelevision.isPresent() && optionalRemoteController.isPresent()) {
+            Television television = optionalTelevision.get();
+            RemoteController remoteController = optionalRemoteController.get();
+
+            television.setRemoteController(remoteController);
+            televisionRepository.save(television);
+
+            remoteController.setTelevision(television);
+            remoteControllerRepository.save(remoteController);
+
+            dto = transferToDto(television);
+            return dto;
+
+
+        } else {
+            if (optionalTelevision.isEmpty() && optionalRemoteController.isEmpty()) {
+                throw new RecordNotFoundException("Television with id: " + id + " and remote controller with id: " + remoteControllerId + " are not found");
+            } else if (optionalTelevision.isEmpty()) {
+                throw new RecordNotFoundException("Television with id: " + id + " is not found");
+            } else {
+                throw new RecordNotFoundException("Remote controller with id: " + remoteControllerId + " is not found");
+            }
+        }
+    }
+
+    public TelevisionDto assignCIModuleToTelevision(Long id, Long ciModuleId) {
+        Optional<Television> optionalTelevision = televisionRepository.findById(id);
+        Optional<CIModule> optionalCIModule = ciModuleRepository.findById(ciModuleId);
+        TelevisionDto dto;
+
+        if (optionalTelevision.isPresent() && optionalCIModule.isPresent()) {
+            Television television = optionalTelevision.get();
+            CIModule ciModule = optionalCIModule.get();
+
+            television.setCiModule(ciModule);
+            televisionRepository.save(television);
+
+            dto = transferToDto(television);
+            return dto;
+        } else {
+            if (optionalTelevision.isEmpty() && optionalCIModule.isEmpty()) {
+                throw new RecordNotFoundException("Television with id: " + id + " and ci-module with id: " + ciModuleId + " are not found");
+            } else if (optionalTelevision.isEmpty()) {
+                throw new RecordNotFoundException("Television with id: " + id + " is not found");
+            } else {
+                throw new RecordNotFoundException("Ci-module with id: " + ciModuleId + " is not found");
+            }
+        }
+    }
+
+
+    // Bonus
     public List<TelevisionSalesDto> getSalesInfo() {
         List<Television> televisions = televisionRepository.findAll();
         List<TelevisionSalesDto> televisionSalesDtos = new ArrayList<>();
