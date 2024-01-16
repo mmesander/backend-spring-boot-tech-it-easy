@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +48,25 @@ public class JwtUtil {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+
+        // Add authorities to token
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+
+        for (GrantedAuthority authority : userDetails.getAuthorities()) {
+            sb.append(authority.toString());
+
+            if (i < userDetails.getAuthorities().size() - 1) {
+                sb.append(", ");
+            }
+
+            i++;
+        }
+
+        String authorities = sb.toString();
+        String easterEgg = "Rowan ik wil écht een 9";
+        claims.put("authorities", authorities);
+        claims.put("easter_egg", easterEgg);
 
         return createToken(claims, userDetails.getUsername());
     }
