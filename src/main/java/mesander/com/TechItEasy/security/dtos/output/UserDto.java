@@ -10,7 +10,6 @@ import java.util.Set;
 @Getter
 @Setter
 public class UserDto {
-    private Long id;
     private String username;
     private String password;
     private Boolean enabled;

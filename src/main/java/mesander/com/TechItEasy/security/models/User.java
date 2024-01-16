@@ -35,4 +35,14 @@ public class User {
 
     @Column
     private String email;
+
+
+    // Methods
+    public void addAuthority(Authority authority) {
+        this.authorities.add(authority);
+    }
+
+    public void removeAuthority(Authority authority) {
+        this.authorities.remove(authority);
+    }
 }
