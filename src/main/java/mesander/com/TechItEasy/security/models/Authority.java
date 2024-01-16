@@ -1,4 +1,4 @@
-package mesander.com.TechItEasy.security;
+package mesander.com.TechItEasy.security.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;

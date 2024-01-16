@@ -1,9 +1,8 @@
-package mesander.com.TechItEasy.models;
+package mesander.com.TechItEasy.security.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import mesander.com.TechItEasy.security.Authority;
 
 import java.util.HashSet;
 import java.util.Set;
