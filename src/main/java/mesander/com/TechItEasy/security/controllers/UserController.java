@@ -2,13 +2,17 @@ package mesander.com.TechItEasy.security.controllers;
 
 import mesander.com.TechItEasy.security.dtos.input.UserInputDto;
 import mesander.com.TechItEasy.security.dtos.output.UserDto;
+import mesander.com.TechItEasy.security.models.User;
 import mesander.com.TechItEasy.security.services.UserService;
 import org.springframework.http.ResponseEntity;
 import mesander.com.TechItEasy.exceptions.BadRequestException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @CrossOrigin
 @RestController
@@ -64,10 +68,10 @@ public class UserController {
     }
 
     @PostMapping(value = "/{username}/authorities")
-    public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
+    public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody String authority) {
         try {
-            String authorityName = (String) fields.get("authority");
-            userService.addAuthority(username, authorityName);
+
+            userService.addAuthority(username, authority);
             return ResponseEntity.noContent().build();
         }
         catch (Exception ex) {
@@ -80,6 +84,22 @@ public class UserController {
         userService.removeAuthority(username, authority);
         return ResponseEntity.noContent().build();
     }
+
+
+    // Bonus
+    @GetMapping(value = "/user/{username}")
+    public ResponseEntity<UserDto> getUser(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @PathVariable String username
+            ) {
+        if (Objects.equals(userDetails.getUsername(), username)) {
+            UserDto userDto = userService.getUser(username);
+            return ResponseEntity.ok(userDto);
+        } else {
+            throw new BadRequestException();
+        }
+    }
+
 
 
 }

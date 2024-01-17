@@ -5,9 +5,11 @@ import mesander.com.TechItEasy.security.dtos.input.UserInputDto;
 import mesander.com.TechItEasy.security.dtos.output.UserDto;
 import mesander.com.TechItEasy.security.models.Authority;
 import mesander.com.TechItEasy.security.models.User;
+import mesander.com.TechItEasy.security.repositories.AuthorityRepository;
 import mesander.com.TechItEasy.security.repositories.UserRepository;
 import mesander.com.TechItEasy.security.utils.RandomStringGenerator;
 import org.springframework.stereotype.Service;
+import static mesander.com.TechItEasy.security.config.SpringSecurityConfig.passwordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +19,14 @@ import java.util.Set;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(
+            UserRepository userRepository,
+            AuthorityRepository authorityRepository
+    ) {
         this.userRepository = userRepository;
+        this.authorityRepository = authorityRepository;
     }
 
 
@@ -41,7 +48,7 @@ public class UserService {
         User user = new User();
 
         user.setUsername(inputDto.getUsername());
-        user.setPassword(inputDto.getPassword());
+        user.setPassword(passwordEncoder().encode(inputDto.getPassword()));
         user.setEnabled(inputDto.getEnabled());
         user.setApiKey(inputDto.getApikey());
         user.setEmail(inputDto.getEmail());
@@ -122,21 +129,11 @@ public class UserService {
         }
     }
 
-//    public UserDto addAuthority(String username, Authority authority) {
-//        Optional<User> user = userRepository.findById(username);
-//        if (user.isPresent()) {
-//            Set<Authority> authorities = user.get().getAuthorities();
-//            authorities.add(authority);
-//            return fromUser(user.get());
-//        } else {
-//            throw new UsernameNotFoundException(username);
-//        }
-//    }
-
-    public UserDto addAuthority(String username, Authority authority) {
+    public UserDto addAuthority(String username, String authority) {
         Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()) {
-            user.get().addAuthority(authority);
+        Optional<Authority> optionalAuthority = authorityRepository.findAuthoritiesByAuthorityContainsIgnoreCase(authority);
+        if (user.isPresent() && optionalAuthority.isPresent()) {
+            user.get().addAuthority(new Authority(username, authority));
             return fromUser(user.get());
         } else {
             throw new UsernameNotFoundException(username);
