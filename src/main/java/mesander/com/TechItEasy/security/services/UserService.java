@@ -122,11 +122,21 @@ public class UserService {
         }
     }
 
+//    public UserDto addAuthority(String username, Authority authority) {
+//        Optional<User> user = userRepository.findById(username);
+//        if (user.isPresent()) {
+//            Set<Authority> authorities = user.get().getAuthorities();
+//            authorities.add(authority);
+//            return fromUser(user.get());
+//        } else {
+//            throw new UsernameNotFoundException(username);
+//        }
+//    }
+
     public UserDto addAuthority(String username, Authority authority) {
         Optional<User> user = userRepository.findById(username);
         if (user.isPresent()) {
-            Set<Authority> authorities = user.get().getAuthorities();
-            authorities.add(authority);
+            user.get().addAuthority(authority);
             return fromUser(user.get());
         } else {
             throw new UsernameNotFoundException(username);
